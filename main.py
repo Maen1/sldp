@@ -84,4 +84,8 @@ cnn_model.fit(
     validation_data = (x_validate, y_validate) 
 )
 
+score = cnn_model.evaluate(x_test, y_test, verbose=0)
+print('test loss : {:.4f}'.format(score[0]))
+print('test acc : {:.4f}'.format(score[1]))
+
 print("done")
