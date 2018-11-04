@@ -1,3 +1,4 @@
+import os
 import numpy as np 
 import pandas as pd 
 import matplotlib
@@ -11,9 +12,13 @@ from keras.callbacks import TensorBoard
 from keras.layers import Conv2D, MaxPooling2D, Dense, Flatten, Dropout
 from sklearn.model_selection import train_test_split
 
+#os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
 # Cons
 IM_SIZE = 28
-BATCH_SIZE = 512
+EPOCHS = 10
+NUM_CLASSES = 25
+BATCH_SIZE = 128
 IM_SHAPE = (IM_SIZE, IM_SIZE, 1)
 # read dataset
 train_df = pd.read_csv(r'./sign-language-mnist/sign_mnist_train.csv')
@@ -49,13 +54,21 @@ x_validate = x_validate.reshape(x_validate.shape[0],*IM_SHAPE)
 # Build the cnn model
 
 cnn_model = Sequential ([
-    Conv2D(filters = 32, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
+    Conv2D(filters = 64, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
     MaxPooling2D(pool_size = 2),
-    Dropout(0.2),
+
+    Conv2D(filters = 42, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
+    MaxPooling2D(pool_size = 2),
+
+    Conv2D(filters = 64, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
+    MaxPooling2D(pool_size = 2),
 
     Flatten(),
-    Dense(32, activation = 'relu'),
-    Dense(24, activation = 'softmax')
+
+    Dense(28, activation = 'relu'),
+    Dropout(0.2),
+
+    Dense(NUM_CLASSES, activation = 'softmax')
 ])
 
 cnn_model.compile(
@@ -63,4 +76,12 @@ cnn_model.compile(
     optimizer = Adam(lr = 0.001),
     metrics = ['accuracy']
 )
-print("test")
+
+# Fitting the model
+cnn_model.fit(
+    x_train, y_train, batch_size = BATCH_SIZE,
+    epochs = EPOCHS, verbose = 1,
+    validation_data = (x_validate, y_validate) 
+)
+
+print("done")
