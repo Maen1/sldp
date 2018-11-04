@@ -45,4 +45,22 @@ x_validate = x_validate.reshape(x_validate.shape[0],*IM_SHAPE)
 # print("train shape{}".format(x_train.shape))
 # print("validate shape{}".format(x_validate.shape))
 # print("test shape{}".format(x_test.shape))
+
+# Build the cnn model
+
+cnn_model = Sequential ([
+    Conv2D(filters = 32, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
+    MaxPooling2D(pool_size = 2),
+    Dropout(0.2),
+
+    Flatten(),
+    Dense(32, activation = 'relu'),
+    Dense(24, activation = 'softmax')
+])
+
+cnn_model.compile(
+    loss = 'sparse_categorical_crossentropy',
+    optimizer = Adam(lr = 0.001),
+    metrics = ['accuracy']
+)
 print("test")
