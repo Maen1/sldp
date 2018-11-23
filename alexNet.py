@@ -10,6 +10,7 @@ from keras.optimizers import Adam
 from keras.models import Sequential
 from keras.callbacks import TensorBoard
 from sklearn.model_selection import train_test_split
+from keras.layers.normalization import BatchNormalization
 from keras.layers import Conv2D, MaxPooling2D, Dense, Flatten, Dropout
 
 #os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
@@ -56,17 +57,32 @@ x_validate = x_validate.reshape(x_validate.shape[0],*IM_SHAPE)
 cnn_model = Sequential ([
     Conv2D(filters = 64, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
     MaxPooling2D(pool_size = 2),
+    BatchNormalization(),
 
-    Conv2D(filters = 42, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
+    Conv2D(filters = 128, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
+    MaxPooling2D(pool_size = 2),
+    BatchNormalization(),
+
+    Conv2D(filters = 128, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
     MaxPooling2D(pool_size = 2),
 
     Conv2D(filters = 64, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
     MaxPooling2D(pool_size = 2),
 
+
     Flatten(),
 
-    Dense(28, activation = 'relu'),
+    Dense(1024, activation = 'relu'),
     Dropout(0.2),
+    BatchNormalization()
+    
+    Dense(1024, activation = 'relu'),
+    Dropout(0.2),
+    BatchNormalization()
+
+    Dense(256, activation = 'relu'),
+    Dropout(0.2),
+    BatchNormalization()
 
     Dense(NUM_CLASSES, activation = 'softmax')
 ])
@@ -76,6 +92,9 @@ cnn_model.compile(
     optimizer = Adam(lr = 0.001),
     metrics = ['accuracy']
 )
+
+# summary
+cnn_model.summary()
 
 # Fitting the model
 cnn_model.fit(
