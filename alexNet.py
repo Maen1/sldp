@@ -1,23 +1,23 @@
 import os
 import numpy as np 
 import pandas as pd 
-#import matplotlib
-#matplotlib.use('TkAgg')
-#import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('TkAgg')
+import matplotlib.pyplot as plt
 
 import keras
 from keras.optimizers import Adam
-from keras.models import load_model
 from keras.models import Sequential
 from keras.callbacks import TensorBoard
 from sklearn.model_selection import train_test_split
+from keras.layers.normalization import BatchNormalization
 from keras.layers import Conv2D, MaxPooling2D, Dense, Flatten, Dropout
 
 #os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 # Cons
 IM_SIZE = 28
-EPOCHS = 20
+EPOCHS = 10
 NUM_CLASSES = 25
 BATCH_SIZE = 128
 IM_SHAPE = (IM_SIZE, IM_SIZE, 1)
@@ -57,6 +57,11 @@ x_validate = x_validate.reshape(x_validate.shape[0],*IM_SHAPE)
 cnn_model = Sequential ([
     Conv2D(filters = 64, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
     MaxPooling2D(pool_size = 2),
+    BatchNormalization(),
+
+    Conv2D(filters = 128, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
+    MaxPooling2D(pool_size = 2),
+    BatchNormalization(),
 
     Conv2D(filters = 128, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
     MaxPooling2D(pool_size = 2),
@@ -64,10 +69,20 @@ cnn_model = Sequential ([
     Conv2D(filters = 64, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
     MaxPooling2D(pool_size = 2),
 
+
     Flatten(),
 
-    Dense(28, activation = 'relu'),
+    Dense(1024, activation = 'relu'),
     Dropout(0.2),
+    BatchNormalization()
+    
+    Dense(1024, activation = 'relu'),
+    Dropout(0.2),
+    BatchNormalization()
+
+    Dense(256, activation = 'relu'),
+    Dropout(0.2),
+    BatchNormalization()
 
     Dense(NUM_CLASSES, activation = 'softmax')
 ])
@@ -78,13 +93,15 @@ cnn_model.compile(
     metrics = ['accuracy']
 )
 
+# summary
+cnn_model.summary()
+
 # Fitting the model
 cnn_model.fit(
     x_train, y_train, batch_size = BATCH_SIZE,
     epochs = EPOCHS, verbose = 1,
     validation_data = (x_validate, y_validate) 
 )
-cnn_model.save('model1.save')
 
 score = cnn_model.evaluate(x_test, y_test, verbose=0)
 print('test loss : {:.4f}'.format(score[0]))
