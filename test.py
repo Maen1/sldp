@@ -55,17 +55,17 @@ x_validate = x_validate.reshape(x_validate.shape[0],*IM_SHAPE)
 # Build the cnn model
 
 cnn_model = Sequential ([
-    Conv2D(filters = 64, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
+    Conv2D(filters = 128, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
     MaxPooling2D(pool_size = 2),
 
     Conv2D(filters = 128, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
     MaxPooling2D(pool_size = 2),
 
-    Conv2D(filters = 256, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
-    MaxPooling2D(pool_size = 2)
-,
-    Conv2D(filters = 128, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
-    MaxPooling2D(pool_size = 2),
+   # Conv2D(filters = 128, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
+   # MaxPooling2D(pool_size = 2),
+
+   # Conv2D(filters = 128, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
+   # MaxPooling2D(pool_size = 2),
 
     Conv2D(filters = 64, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
     MaxPooling2D(pool_size = 2),
@@ -90,7 +90,7 @@ cnn_model.fit(
     epochs = EPOCHS, verbose = 1,
     validation_data = (x_validate, y_validate) 
 )
-cnn_model.save('model1.save')
+cnn_model.save('model_server.save')
 
 score = cnn_model.evaluate(x_test, y_test, verbose=0)
 print('test loss : {:.4f}'.format(score[0]))
