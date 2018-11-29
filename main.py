@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 
 import keras
 from keras.optimizers import Adam
+from keras.models import load_model
 from keras.models import Sequential
 from keras.callbacks import TensorBoard
 from sklearn.model_selection import train_test_split
@@ -16,7 +17,7 @@ from keras.layers import Conv2D, MaxPooling2D, Dense, Flatten, Dropout
 
 # Cons
 IM_SIZE = 28
-EPOCHS = 10
+EPOCHS = 20
 NUM_CLASSES = 25
 BATCH_SIZE = 128
 IM_SHAPE = (IM_SIZE, IM_SIZE, 1)
@@ -57,7 +58,7 @@ cnn_model = Sequential ([
     Conv2D(filters = 64, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
     MaxPooling2D(pool_size = 2),
 
-    Conv2D(filters = 42, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
+    Conv2D(filters = 128, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
     MaxPooling2D(pool_size = 2),
 
     Conv2D(filters = 64, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
@@ -83,6 +84,7 @@ cnn_model.fit(
     epochs = EPOCHS, verbose = 1,
     validation_data = (x_validate, y_validate) 
 )
+cnn_model.save('model1.save')
 
 score = cnn_model.evaluate(x_test, y_test, verbose=0)
 print('test loss : {:.4f}'.format(score[0]))
