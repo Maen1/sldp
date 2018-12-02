@@ -61,6 +61,10 @@ cnn_model = Sequential ([
     Conv2D(filters = 32, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
     MaxPooling2D(pool_size=(2, 2), strides=(2, 2)),
 
+    Conv2D(filters = 64, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
+    MaxPooling2D(pool_size=(2, 2), strides=(2, 2)),
+
+
     Flatten(),
     
     Dense(256, activation = 'relu'),
