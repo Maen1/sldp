@@ -84,7 +84,7 @@ cnn_model.fit(
     epochs = EPOCHS, verbose = 1,
     validation_data = (x_validate, y_validate) 
 )
-cnn_model.save('model_leNet.save')
+cnn_model.save('model_leNet.h5')
 
 score = cnn_model.evaluate(x_test, y_test, verbose=0)
 print('test loss : {:.4f}'.format(score[0]))

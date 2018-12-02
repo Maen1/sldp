@@ -19,7 +19,7 @@ from keras.layers import Conv2D, MaxPooling2D, Dense, Flatten, Dropout
 IM_SIZE = 28
 EPOCHS = 20
 NUM_CLASSES = 25
-BATCH_SIZE = 128
+BATCH_SIZE = 256
 IM_SHAPE = (IM_SIZE, IM_SIZE, 1)
 # read dataset
 train_df = pd.read_csv(r'./sign-language-mnist/sign_mnist_train.csv')
@@ -90,7 +90,7 @@ cnn_model.fit(
     epochs = EPOCHS, verbose = 1,
     validation_data = (x_validate, y_validate) 
 )
-cnn_model.save('model_server.save')
+cnn_model.save('model_server.h5')
 
 score = cnn_model.evaluate(x_test, y_test, verbose=0)
 print('test loss : {:.4f}'.format(score[0]))
