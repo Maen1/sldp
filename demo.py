@@ -9,9 +9,11 @@ video = cv2.VideoCapture(0)
 while True:
         _, frame = video.read()
 
-        im = Image.fromarray(frame, 'RGB')
-
-        im = im.resize((28,28))
+        im = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        
+        #im = Image.fromarray(im)
+        im = np.resize(im,(28,28))
+        im = np.reshape(im, (28,28,1))
         img_array = np.array(im)
 
         
