@@ -92,7 +92,7 @@ cnn_model.fit(
 )
 cnn_model.save('model_server.h5')
 
-score = cnn_model.evaluate(x_test, y_test, verbose=0)
+score = cnn_model.evaluate(x_test, y_test, verbose=1)
 print('test loss : {:.4f}'.format(score[0]))
 print('test acc : {:.4f}'.format(score[1]))
 
