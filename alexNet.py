@@ -59,9 +59,9 @@ cnn_model = Sequential ([
     MaxPooling2D(pool_size = 2),
     BatchNormalization(),
 
-    Conv2D(filters = 128, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
-    MaxPooling2D(pool_size = 2),
-    BatchNormalization(),
+    # Conv2D(filters = 128, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
+    # MaxPooling2D(pool_size = 2),
+    # BatchNormalization(),
 
     Conv2D(filters = 128, kernel_size = 3, activation = 'relu', input_shape = IM_SHAPE),
     MaxPooling2D(pool_size = 2),
