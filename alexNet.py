@@ -74,15 +74,15 @@ cnn_model = Sequential ([
 
     Dense(1024, activation = 'relu'),
     Dropout(0.2),
-    BatchNormalization()
+    BatchNormalization(),
     
     Dense(1024, activation = 'relu'),
     Dropout(0.2),
-    BatchNormalization()
+    BatchNormalization(),
 
     Dense(256, activation = 'relu'),
     Dropout(0.2),
-    BatchNormalization()
+    BatchNormalization(),
 
     Dense(NUM_CLASSES, activation = 'softmax')
 ])
