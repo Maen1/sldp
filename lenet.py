@@ -63,9 +63,7 @@ cnn_model = Sequential ([
 
 
     Flatten(),
-    Dense(512, activation = 'relu'),
-    Dropout(0.2),
-
+    
     Dense(256, activation = 'relu'),
     Dropout(0.2),
 
