@@ -62,7 +62,7 @@ cnn_model = Sequential ([
     # MaxPooling2D(pool_size=(2, 2), strides=(2, 2)),
 
 
-    # Flatten(),
+    Flatten(),
     Dense(512, activation = 'relu'),
     Dropout(0.2),
 
