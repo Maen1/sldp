@@ -20,7 +20,7 @@ while True:
         img_array = np.expand_dims(img_array, axis=0)
 
         prediction = int(model.predict(img_array)[0][0])
-
+        print(prediction)
         if prediction == 0:
                 frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
@@ -28,4 +28,6 @@ while True:
         key=cv2.waitKey(1)
         if key == ord('q'):
                 break
+                
+cv2.destroyAllWindows()
 video.release()
