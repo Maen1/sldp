@@ -17,7 +17,7 @@ from keras.layers import Conv2D, MaxPooling2D, Dense, Flatten, Dropout
 
 # Cons
 IM_SIZE = 28
-EPOCHS = 15
+EPOCHS = 1000
 NUM_CLASSES = 25
 BATCH_SIZE = 128
 IM_SHAPE = (IM_SIZE, IM_SIZE, 1)
