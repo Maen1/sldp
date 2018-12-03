@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 from keras import models
 
-model = models.load_model('model_leNet.h5')
+model = models.load_model('model_leNet1.h5')
 video = cv2.VideoCapture(0)
 
 while True:
