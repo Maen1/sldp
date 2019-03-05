@@ -1,8 +1,8 @@
 
 from  pascal_voc_writer import Writer
 import os
-# path = "../tf-dataset/test/"
-path = "../asl-alphabet/asl_alphabet_test/"
+path = "../tf-dataset/test/"
+#path = "../asl-alphabet/asl_alphabet_test/"
 
 for filename in os.listdir(path):
     if filename.endswith("jpg"):
