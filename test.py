@@ -3,7 +3,7 @@ import os
 from keras.layers import Conv2D, Dense, Dropout, Flatten
 from keras.models import Sequential, load_model
 from keras.preprocessing.image import ImageDataGenerator
-
+from keras.utils import multi_gpu_model
 # Ensure consistency across runs
 from numpy.random import seed
 import random
@@ -19,11 +19,15 @@ from glob import glob
 
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+#tensorflow 
+#import tensorflow as tf
+#config = tf.ConfigProto()
+#config.gpu_options.allow_growth=True
 
 
 # Set global variables
-data_dir = "../asl-alphabet/asl_alphabet_train"
-test_dir = '../asl-alphabet/asl_alphabet_test'
+data_dir = "../asl_alphabet/asl_alphabet_train"
+test_dir = '../asl_alphabet/asl_alphabet_test'
 
 target_size = (64, 64)
 target_dims = (64, 64, 3) # add channel for RGB
@@ -55,11 +59,12 @@ my_model.add(Dropout(0.5))
 my_model.add(Dense(512, activation='relu'))
 my_model.add(Dense(n_classes, activation='softmax'))
 
-my_model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=["accuracy"])
+parallel_model = multi_gpu_model(my_model, gpus=8)
+parallel_model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=["accuracy"])
 
-my_model.fit_generator(train_generator,steps_per_epoch=train_generator.__len__(), epochs=5, validation_data=val_generator, validation_steps=batch_size)
+parallel_model.fit_generator(train_generator,steps_per_epoch=train_generator.__len__(), epochs=5, validation_data=val_generator, validation_steps=batch_size)
 
-my_model.save('test.h5')
+parallel_model.save('test.h5')
 
 # score = cnn_model.evaluate(test_generator, verbose=1)
 # print('test loss : {:.4f}'.format(score[0]))

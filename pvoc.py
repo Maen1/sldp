@@ -1,7 +1,7 @@
 
 from  pascal_voc_writer import Writer
 import os
-path = "../asl-alphabet/asl_alphabet_train/B/"
+path = "../tf-dataset/test/"
 
 for filename in os.listdir(path):
     if filename.endswith("jpg"):
@@ -9,5 +9,7 @@ for filename in os.listdir(path):
 
         writer.addObject('a',0,0,200,200)
         name = os.path.splitext(filename)[0]
-        print(path + name+'.xml')
-        # writer.save(path + name+'.xml')
+        # print(path + name+'.xml')
+        writer.save(path + name+'.xml')
+
+print("done...")
