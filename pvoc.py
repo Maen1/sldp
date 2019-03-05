@@ -1,9 +1,15 @@
 
 from  pascal_voc_writer import Writer
+import os
+path = "../asl-alphabet/asl_alphabet_train/B/"
+# writer = Writer(path, 200,200)
 
-path = "/Downloads/asl-alphabet/asl_alphabet_train/A/A1.jpg"
-writer = Writer(path, 200,200)
+# writer.addObject('a',0,0,200,200)
 
-writer.addObject('a',50,50,150,150)
-
-writer.save('./a.xml')
+# writer.save('./a.xml')
+ctr=0;
+for filename in os.listdir(path):
+    if filename.endswith("jpg"): 
+        # Your code comes here such as
+        print(filename)
+    print(ctr)
