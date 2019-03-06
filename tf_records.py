@@ -36,6 +36,57 @@ def class_text_to_int(row_label):
         return 3
     elif row_label == 'D':
         return 4
+    elif row_label == 'E':
+        return 5
+    elif row_label == 'F':
+        return 6
+    elif row_label == 'G':
+        return 7
+    elif row_label == 'H':
+        return 8
+    elif row_label == 'I':
+        return 9
+    elif row_label == 'J':
+        return 10
+    elif row_label == 'K':
+        return 11
+    elif row_label == 'L':
+        return 12
+    elif row_label == 'M':
+        return 13
+    elif row_label == 'N':
+        return 14
+    elif row_label == 'O':
+        return 15
+    elif row_label == 'P':
+        return 16
+    elif row_label == 'Q':
+        return 17
+    elif row_label == 'R':
+        return 18
+    elif row_label == 'S':
+        return 19
+    elif row_label == 'T':
+        return 20
+    elif row_label == 'U':
+        return 21
+    elif row_label == 'V':
+        return 22
+    elif row_label == 'W':
+        return 23
+    elif row_label == 'X':
+        return 24
+    elif row_label == 'Y':
+        return 25
+    elif row_label == 'Z':
+        return 26
+    elif row_label == 's':
+        return 27
+    elif row_label == 'd':
+        return 28
+    elif row_label == 'n':
+        return 29
+    
     else:
         None
 
