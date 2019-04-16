@@ -25,10 +25,10 @@ def xml_to_csv(path):
     return xml_df
 
 def main():
-    for directory in ['train','test']:
-        image_path = os.path.join(os.getcwd(), 'images/{}'.format(directory))
+    for directory in ['asl_alphabet_test']:
+        image_path = os.path.join(os.getcwd(), '../asl-alphabet/asl_alphabet_test/'.format(directory))
         xml_df = xml_to_csv(image_path)
-        xml_df.to_csv('data/{}_labels.csv'.format(directory), index=None)
+        xml_df.to_csv('../asl-alphabet/data/{}_labels.csv'.format(directory), index=None)
         print('Successfully converted xml to csv.')
 
 main()
