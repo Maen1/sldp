@@ -6,5 +6,5 @@
 - [x] install tensorflow object detection api.
 - [x] annotate images (make xml file for every image).
 - [x] conver xml file to csv
-- [ ] conver csv to tf recod
-- [ ] train the dataset with different algorithms.
+- [x] conver csv to tf recod
+- [x] train the dataset with different algorithms.
